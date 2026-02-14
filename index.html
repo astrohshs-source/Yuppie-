@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Our Love Journey ❤️</title>
+
+<style>
+body{
+margin:0;
+font-family:Segoe UI;
+background:linear-gradient(135deg,#ff9ab0,#ff5f8f);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+text-align:center;
+color:red;
+overflow:hidden;
+transition:background 2s;
+}
+
+/* intro */
+#intro{
+position:absolute;
+background:linear-gradient(135deg,#ff004c,#ff5f8f);
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:70px;
+color:white;
+letter-spacing:8px;
+animation:introAnim 4s forwards;
+z-index:5;
+}
+@keyframes introAnim{
+0%{opacity:0;transform:scale(0.5);}
+30%{opacity:1;}
+80%{opacity:1;}
+100%{opacity:0;transform:scale(1.2);}
+}
+
+/* typing text */
+.typing{
+border-right:3px solid red;
+white-space:nowrap;
+overflow:hidden;
+animation:typing 4s steps(40,end), blink .8s infinite;
+}
+@keyframes typing{from{width:0} to{width:100%}}
+@keyframes blink{50%{border-color:transparent}}
+
+/* falling hearts */
+.heart{
+position:fixed;
+top:-40px;
+font-size:24px;
+animation:fall linear infinite;
+}
+@keyframes fall{
+0%{transform:translateY(-50px);}
+100%{transform:translateY(110vh);}
+}
+
+.card{
+background:rgba(255,255,255,0.3);
+padding:40px;
+border-radius:20px;
+max-width:550px;
+z-index:2;
+}
+
+button{
+padding:14px 28px;
+margin:10px;
+border:none;
+border-radius:20px;
+font-size:20px;
+cursor:pointer;
+background:red;
+color:white;
+}
+</style>
+</head>
+
+<body onclick="startMusic()">
+
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5f7c2f4e3b.mp3">
+</audio>
+
+<div id="intro">SAJAL ❤️</div>
+
+<div class="card" id="box" style="opacity:0;">
+<h2>Propose Day 💍</h2>
+<p class="typing">Sajal, my 3.5 little baccha 🐣❤️</p>
+<p>Will you stay with me forever?</p>
+<button id="yesBtn" onclick="choco()">YES ❤️</button>
+<button id="noBtn" onclick="noClick()">NO</button>
+</div>
+
+<script>
+
+/* iPhone autoplay trick */
+function startMusic(){
+document.getElementById("music").play();
+}
+
+/* intro show */
+setTimeout(()=>{
+intro.style.display="none";
+box.style.opacity="1";
+},4000);
+
+/* falling hearts */
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(4+Math.random()*3)+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),7000);
+},300);
+
+/* NO tease */
+let noCount=0;
+function noClick(){
+noCount++;
+yesBtn.style.transform="scale("+(1+noCount*0.3)+")";
+noBtn.style.transform="scale("+(1-noCount*0.2)+")";
+if(noCount>=4) noBtn.style.display="none";
+}
+
+/* next slides simplified */
+function choco(){ box.innerHTML="<h2>Chocolate Day 🍫</h2><button onclick='valentine()'>Next ❤️</button>"; }
+
+/* Valentine */
+function valentine(){
+box.innerHTML="<h2>❤️ Happy Valentine's Day ❤️</h2>\
+<p>Will you be my Valentine forever?</p>\
+<button onclick='explode()'>YES ❤️</button>";
+}
+
+/* fireworks + confetti */
+function explode(){
+for(let i=0;i<200;i++){
+let d=document.createElement("div");
+d.innerHTML="🎉";
+d.style.position="absolute";
+d.style.left=Math.random()*100+"vw";
+d.style.top=Math.random()*100+"vh";
+d.style.fontSize="28px";
+document.body.appendChild(d);
+setTimeout(()=>d.remove(),3000);
+}
+alert("She said YES ❤️ 14 February 2026");
+}
+
+</script>
+
+</body>
+</html>
